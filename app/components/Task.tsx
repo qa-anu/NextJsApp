@@ -2,10 +2,10 @@
 
 import { ITask } from "@/types/tasks";
 import { FormEventHandler, useState } from "react";
-import { FiEdit, FiTrash2 } from "react-icons/fi";
+import { FiEdit, FiTrash2, FiEye} from "react-icons/fi";
 import Modal from "./Modal";
 import { useRouter } from "next/navigation";
-import { deleteTodo, editTodo } from "@/api";
+import { deleteTodo, editTodo, ViewTodo} from "@/api";
 
 interface TaskProps {
   task: ITask;
@@ -14,6 +14,7 @@ interface TaskProps {
 const Task: React.FC<TaskProps> = ({ task }) => {
   const router = useRouter();
   const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
+  const [openModalView, setOpenModalView] = useState<boolean>(false);
   const [openModalDeleted, setOpenModalDeleted] = useState<boolean>(false);
   const [taskToEdit, setTaskToEdit] = useState<string>(task.text);
 
@@ -25,6 +26,8 @@ const Task: React.FC<TaskProps> = ({ task }) => {
     });
     setOpenModalEdit(false);
     router.refresh();
+    console.log(task.id, '123');
+    
   };
 
   const handleDeleteTask = async (id: string) => {
@@ -32,6 +35,16 @@ const Task: React.FC<TaskProps> = ({ task }) => {
     setOpenModalDeleted(false);
     router.refresh();
   };
+  const handleModalView = async (id: string) => {
+    await ViewTodo({
+      id: task.id,
+      text: taskToEdit,
+    });;
+    setOpenModalView(false);
+    router.refresh();
+    console.log(id,'anu');
+    
+  }
 
   return (
     <tr key={task.id}>
@@ -73,6 +86,22 @@ const Task: React.FC<TaskProps> = ({ task }) => {
           <div className='modal-action'>
             <button onClick={() => handleDeleteTask(task.id)} className='hover:shadow-form rounded-md btn btn bg-emerald-800'>
               Yes
+            </button>
+          </div>
+        </Modal>
+        <FiEye 
+         onClick={() => setOpenModalView(true)}
+         cursor='pointer'
+         className='text-blue-500'
+         size={25}/>
+         <Modal modalOpen={openModalView} setModalOpen={setOpenModalView}>
+          <h3 className='text-lg'>
+            {taskToEdit}
+            {console.log(taskToEdit, 'hi')}
+          </h3>
+          <div className='modal-action'>
+            <button onClick={() =>{ handleModalView(task.id), router.push('app/task')}} className='hover:shadow-form rounded-md btn btn bg-emerald-800'>
+              View
             </button>
           </div>
         </Modal>
