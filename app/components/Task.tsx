@@ -54,8 +54,8 @@ const Task: React.FC<TaskProps> = ({ task }) => {
                 placeholder='Type here'
                 className='input input-bordered w-full'
               />
-              <button type='submit' className='btn btn-outline focus: bg-emerald-800'>
-                Edit
+              <button type='submit' className='hover:shadow-form rounded-md btn btn bg-emerald-800'>
+                Save
               </button>
             </div>
           </form>
@@ -71,7 +71,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
             Are you sure, you want to delete this task?
           </h3>
           <div className='modal-action'>
-            <button onClick={() => handleDeleteTask(task.id)} className='btn btn-outline bg-emerald-800'>
+            <button onClick={() => handleDeleteTask(task.id)} className='hover:shadow-form rounded-md btn btn bg-emerald-800'>
               Yes
             </button>
           </div>

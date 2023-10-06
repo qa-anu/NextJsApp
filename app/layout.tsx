@@ -2,8 +2,8 @@ import Navbar from "./components/navbar/Navigation";
 import "./globals.css";
 
 export const metadata = {
-  title: "Simple TodoApp",
-  description: "simple todo app for learning next js 13",
+  title: "Demo App",
+  description: "",
 };
 
 export default function RootLayout({
