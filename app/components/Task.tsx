@@ -97,11 +97,11 @@ const Task: React.FC<TaskProps> = ({ task }) => {
          <Modal modalOpen={openModalView} setModalOpen={setOpenModalView}>
           <h3 className='text-lg'>
             {taskToEdit}
-            {console.log(taskToEdit, 'hi')}
+            {console.log(taskToEdit, 'tasktoEdit')}
           </h3>
           <div className='modal-action'>
-            <button onClick={() =>{ handleModalView(task.id), router.push('app/task')}} className='hover:shadow-form rounded-md btn btn bg-emerald-800'>
-              View
+            <button onClick={() => handleModalView(task.id)} className='hover:shadow-form rounded-md btn btn bg-emerald-800'>
+              OK
             </button>
           </div>
         </Modal>
